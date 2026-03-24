@@ -6,6 +6,7 @@
 - 调用 CRM token 接口
 - 返回 access_token
 - 支持返回原始响应
+- 支持把 token 自动写入 MCP Server 的 `application.yml`
 - 设计为可分发目录，使用时可自带 JRE，无需安装 Java 或 Maven
 
 ## 目录结构
@@ -22,6 +23,7 @@
 填写：
 - `crmUsername`
 - `crmPassword`
+- `mcpApplicationYmlPath`
 
 ## 使用方式
 
@@ -35,6 +37,11 @@ run.bat login
 run.bat raw
 ```
 
+### 登录并写入 MCP 配置
+```bat
+run.bat write-mcp-token
+```
+
 ## 输出格式
 成功示例：
 
@@ -42,14 +49,18 @@ run.bat raw
 {"success":true,"action":"login","access_token":"xxxxx"}
 ```
 
+```json
+{"success":true,"action":"write-mcp-token","message":"token 已写入 MCP application.yml","mcpApplicationYmlPath":"D:/Project/mcp/src/main/resources/application.yml"}
+```
+
 失败示例：
 
 ```json
-{"success":false,"action":"login","message":"错误信息"}
+{"success":false,"action":"write-mcp-token","message":"错误信息"}
 ```
 
 ## 注意事项
 - 需确保本机可以访问 CRM 服务地址
 - 默认 token 地址为：`http://192.168.1.251:9999/auth/oauth/token`
 - 用户名和密码只从配置文件读取
-- 如需修改接口地址或认证参数，请编辑配置文件
+- 当前会把 token 写入 MCP 项目的 `application.yml`

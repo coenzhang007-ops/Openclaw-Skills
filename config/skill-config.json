@@ -1,9 +1,10 @@
 {
-  "tokenUrl": "http://192.168.1.250:9999/auth/oauth/token",
+  "tokenUrl": "http://192.168.1.251:9999/auth/oauth/token",
   "basicAuthUsername": "crm-admin",
   "basicAuthPassword": "crm-admin",
   "scope": "server",
   "grantType": "password",
   "crmUsername": "",
-  "crmPassword": ""
+  "crmPassword": "",
+  "mcpApplicationYmlPath": "D:/Project/mcp/src/main/resources/application.yml"
 }

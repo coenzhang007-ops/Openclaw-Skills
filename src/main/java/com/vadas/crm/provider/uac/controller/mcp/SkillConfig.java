@@ -9,6 +9,7 @@ public class SkillConfig {
     private String grantType;
     private String crmUsername;
     private String crmPassword;
+    private String mcpApplicationYmlPath;
 
     public String getTokenUrl() {
         return tokenUrl;
@@ -64,5 +65,13 @@ public class SkillConfig {
 
     public void setCrmPassword(String crmPassword) {
         this.crmPassword = crmPassword;
+    }
+
+    public String getMcpApplicationYmlPath() {
+        return mcpApplicationYmlPath;
+    }
+
+    public void setMcpApplicationYmlPath(String mcpApplicationYmlPath) {
+        this.mcpApplicationYmlPath = mcpApplicationYmlPath;
     }
 }

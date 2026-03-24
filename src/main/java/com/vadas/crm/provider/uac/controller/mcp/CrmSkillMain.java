@@ -21,6 +21,14 @@ public class CrmSkillMain {
                 return;
             }
 
+            if ("write-mcp-token".equalsIgnoreCase(action)) {
+                String token = client.loginAndGetToken(config);
+                McpTokenWriter writer = new McpTokenWriter();
+                writer.writeTokenToApplicationYml(config.getMcpApplicationYmlPath(), token);
+                System.out.println("{\"success\":true,\"action\":\"write-mcp-token\",\"message\":\"token 已写入 MCP application.yml\",\"mcpApplicationYmlPath\":\"" + escapeJson(config.getMcpApplicationYmlPath()) + "\"}");
+                return;
+            }
+
             System.out.println("{\"success\":false,\"message\":\"不支持的action: " + escapeJson(action) + "\"}");
             System.exit(1);
 

@@ -45,6 +45,10 @@ public class SkillConfigLoader {
             throw new RuntimeException("crmPassword 未配置");
         }
 
+        if (isBlank(config.getMcpApplicationYmlPath())) {
+            throw new RuntimeException("mcpApplicationYmlPath 未配置");
+        }
+
         return config;
     }
 
