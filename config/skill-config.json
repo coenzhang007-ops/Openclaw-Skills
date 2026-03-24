@@ -4,6 +4,6 @@
   "basicAuthPassword": "crm-admin",
   "scope": "server",
   "grantType": "password",
-  "crmUsername": "Coen Zhang",
-  "crmPassword": "222222"
+  "crmUsername": "",
+  "crmPassword": ""
 }
