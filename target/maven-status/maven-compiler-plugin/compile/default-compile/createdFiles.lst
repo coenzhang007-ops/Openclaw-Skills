@@ -1,0 +1,4 @@
+com\vadas\crm\provider\uac\controller\mcp\CrmTokenClient.class
+com\vadas\crm\provider\uac\controller\mcp\SkillConfig.class
+com\vadas\crm\provider\uac\controller\mcp\CrmSkillMain.class
+com\vadas\crm\provider\uac\controller\mcp\SkillConfigLoader.class

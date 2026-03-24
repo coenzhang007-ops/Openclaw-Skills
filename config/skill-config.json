@@ -1,0 +1,9 @@
+{
+  "tokenUrl": "http://192.168.1.250:9999/auth/oauth/token",
+  "basicAuthUsername": "crm-admin",
+  "basicAuthPassword": "crm-admin",
+  "scope": "server",
+  "grantType": "password",
+  "crmUsername": "Coen Zhang",
+  "crmPassword": "222222"
+}
