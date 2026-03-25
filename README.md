@@ -1,13 +1,14 @@
 # crm-auth-skill
 
-这是一个可供 OpenClaw 使用的本地 skill，用于登录 CRM OAuth 接口并获取 `access_token`，也可以把 token 自动写入本地 MCP server 的 `application.yml`。
+这是一个可供 OpenClaw 使用的本地 skill，用于登录 CRM OAuth 接口并获取 `access_token`，然后由 OpenClaw 在调用 CRM 相关 MCP tool 时把 token 作为参数传入。
 
 ## 功能
 
 - 调用 CRM token 接口
 - 返回 access_token
 - 支持返回原始响应
-- 支持把 token 自动写入 MCP Server 的 `application.yml`
+- 推荐由 OpenClaw 在调用 MCP tool 时把 token 作为参数传入
+- 兼容旧流程：仍支持把 token 写入 MCP Server 的 `application.yml`
 - 自带 `run.bat` 启动入口
 - 可携带内置 JRE 运行
 
@@ -42,7 +43,7 @@ run.bat login
 run.bat raw
 ```
 
-### 登录并写入 MCP 配置
+### 登录并写入 MCP 配置（旧流程兼容）
 
 ```bat
 run.bat write-mcp-token
@@ -60,7 +61,7 @@ copy config\skill-config.example.json config\skill-config.json
 
 - `crmUsername`
 - `crmPassword`
-- `mcpApplicationYmlPath`
+- `mcpApplicationYmlPath`（仅旧流程 `write-mcp-token` 需要）
 
 ## 导入到 OpenClaw
 
@@ -75,3 +76,28 @@ C:\Users\EDY\.openclaw\workspace\skills\crm-auth-skill
 然后 OpenClaw 就可以读取其中的 `SKILL.md` 作为技能说明。
 
 如果你有自己的 OpenClaw skill 导入命令，也建议导入整个目录，而不是只导入 jar。
+
+## 推荐的新链路
+
+1. OpenClaw 先执行：
+
+```bat
+run.bat login
+```
+
+2. 从输出中拿到：
+
+```json
+{"success":true,"action":"login","access_token":"xxxxx"}
+```
+
+3. 再调用 CRM 相关 MCP tool，并把 token 当成参数传入，例如：
+
+```json
+{
+  "company": "vadas",
+  "accessToken": "xxxxx"
+}
+```
+
+这样就不需要把 token 固化写进 MCP server 的 yml 配置里了。

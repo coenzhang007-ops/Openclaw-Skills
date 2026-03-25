@@ -1,6 +1,6 @@
 ---
 name: crm-auth-skill
-description: Login to a CRM OAuth endpoint, return an access token, optionally return the raw OAuth response, and optionally write the token into an MCP server application.yml so local MCP tools can authenticate to CRM.
+description: Login to a CRM OAuth endpoint and return an access token so OpenClaw can pass it as a parameter when calling CRM-related MCP tools.
 metadata:
   openclaw:
     emoji: "🔐"
@@ -14,14 +14,14 @@ metadata:
 
 # CRM Auth Skill
 
-登录 CRM OAuth 接口，获取 `access_token`，并可选择把 token 写入本地 MCP Server 的 `application.yml`。
+登录 CRM OAuth 接口，获取 `access_token`，供 OpenClaw 在调用 CRM 相关 MCP tool 时作为参数传入。
 
 ## What this skill does
 
 - 登录 CRM OAuth token 接口
 - 返回 `access_token`
 - 返回原始响应内容
-- 将 token 自动写入 MCP Server 的 `application.yml`
+- 让 OpenClaw 在后续调用 MCP tool 时把 token 作为参数传入
 
 ## Entry point
 
@@ -52,7 +52,9 @@ run.bat raw
 ```
 
 ### write-mcp-token
-登录并把 token 写入 MCP Server 的 `application.yml`：
+兼容旧流程：登录并把 token 写入 MCP Server 的 `application.yml`。
+
+> 现在更推荐直接使用 `login`，然后由 OpenClaw 把 `access_token` 作为参数传给 MCP tool。
 
 ```bat
 run.bat write-mcp-token
@@ -85,7 +87,7 @@ copy config\skill-config.example.json config\skill-config.json
 
 - `crmUsername`
 - `crmPassword`
-- `mcpApplicationYmlPath` （当你要执行 `write-mcp-token` 时必须正确）
+- `mcpApplicationYmlPath` （仅当你还要执行 `write-mcp-token` 兼容旧流程时必须正确）
 
 ### Optional / environment-specific fields
 
@@ -107,6 +109,29 @@ copy config\skill-config.example.json config\skill-config.json
 
 ```json
 {"success":true,"action":"write-mcp-token","message":"token 已写入 MCP application.yml","mcpApplicationYmlPath":"D:/Project/mcp/src/main/resources/application.yml"}
+```
+
+### Recommended OpenClaw chaining
+
+1. 先执行：
+
+```bat
+run.bat login
+```
+
+2. 从返回 JSON 中读取：
+
+```json
+{"success":true,"action":"login","access_token":"xxxxx"}
+```
+
+3. 调用 CRM MCP tool 时传参：
+
+```json
+{
+  "company": "vadas",
+  "accessToken": "xxxxx"
+}
 ```
 
 ### Failure example
