@@ -70,7 +70,7 @@ copy config\skill-config.example.json config\skill-config.json
 
 ```json
 {
-  "tokenUrl": "http://192.168.1.251:9999/auth/oauth/token",
+  "tokenUrl": "http://192.168.1.250:9999/auth/oauth/token",
   "basicAuthUsername": "crm-admin",
   "basicAuthPassword": "crm-admin",
   "scope": "server",

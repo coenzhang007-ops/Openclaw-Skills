@@ -36,7 +36,7 @@ copy /Y "%DIR%config\skill-config.example.json" "%TEMP_DIR%\%ROOT_NAME%\config\s
 
 (
     echo {
-    echo   "tokenUrl": "http://192.168.1.251:9999/auth/oauth/token",
+    echo   "tokenUrl": "http://192.168.1.250:9999/auth/oauth/token",
     echo   "basicAuthUsername": "crm-admin",
     echo   "basicAuthPassword": "crm-admin",
     echo   "scope": "server",
