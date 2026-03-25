@@ -101,3 +101,5 @@ run.bat login
 ```
 
 这样就不需要把 token 固化写进 MCP server 的 yml 配置里了。
+
+另外，这个 skill 现在会优先查找当前工作目录下的 `config/skill-config.json`；如果没找到，则自动回退到 skill 自身目录下的 `config/skill-config.json`，因此从别的目录启动也能正常工作。
