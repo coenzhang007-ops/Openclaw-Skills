@@ -1,0 +1,4 @@
+config/skill-config.json
+.idea/
+target/
+*.log
